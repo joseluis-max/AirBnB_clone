@@ -2,6 +2,8 @@
 """ Base Model Implementation """
 import uuid
 from datetime import datetime
+import models
+
 
 
 class BaseModel:
@@ -30,6 +32,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """Return a representation in string of the instance
@@ -40,11 +43,13 @@ class BaseModel:
         """Update the created datetime
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """Return dictionary representation instance
         """
-        self.__dict__["__class__"] = self.__class__.__name__
-        self.__dict__["created_at"] = str(self.created_at.isoformat())
-        self.__dict__["updated_at"] = str(self.updated_at.isoformat())
-        return self.__dict__
+        dic = dict(self.__dict__)
+        dic["__class__"] = self.__class__.__name__
+        dic["created_at"] = self.created_at.isoformat()
+        dic["updated_at"] = self.updated_at.isoformat()
+        return dic
