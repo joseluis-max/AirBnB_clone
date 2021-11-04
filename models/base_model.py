@@ -21,7 +21,6 @@ class BaseModel:
                 *arg: non key value arguments
                 **kargs key value arguments
         """
-        f = ['id', 'create_at', 'update_at', 'name', 'my_number']
         if kargs and len(kargs) > 0:
             self.id = kargs.get('id')
             self.created_at = datetime.strptime(kargs.get('created_at'), "%Y-%m-%dT%H:%M:%S.%f")
@@ -30,12 +29,15 @@ class BaseModel:
             self.my_number = kargs.get('my_number') 
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            dt = datetime.now()
+            self.created_at = dt
+            self.updated_at = dt
             models.storage.new(self)
 
     def __str__(self):
         """Return a representation in string of the instance
+
+            Return: string representation of instance
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
@@ -47,6 +49,8 @@ class BaseModel:
 
     def to_dict(self):
         """Return dictionary representation instance
+
+            Return: Dictionary representation of instance
         """
         dic = dict(self.__dict__)
         dic["__class__"] = self.__class__.__name__
