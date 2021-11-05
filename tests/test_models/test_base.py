@@ -1,7 +1,11 @@
 #!/usr/bin/python3
+"""Testing BaseModel case
+"""
 from datetime import datetime
 import unittest
 from models.base_model import BaseModel
+import models
+import os
 
 class TestBase(unittest.TestCase):
     # testing types data
@@ -76,6 +80,23 @@ class TestBase(unittest.TestCase):
         s = "[BaseModel] ({}) {}"
         base = BaseModel()
         self.assertEqual(base.__str__(), s.format(base.id, base.__dict__))
+
+    def test_docstring(self):
+        """ function test_docstring """
+        msj = "Module doesnt have docstring"
+        obj = models.engine.file_storage.__doc__
+        self.assertIsNotNone(obj, msj)
+        msj = "Classes doesnt have docstring"
+        self.assertIsNotNone(obj, msj)
+
+    def test_executable_file(self):
+        """ function test_executable_file """
+        is_read_true = os.access("models/engine/file_storage.py", os.R_OK)
+        self.assertTrue(is_read_true)
+        is_write_true = os.access("models/engine/file_storage.py", os.W_OK)
+        self.assertTrue(is_write_true)
+        is_exec_true = os.access("models/engine/file_storage.py", os.X_OK)
+        self.assertTrue(is_exec_true)
 
 if __name__ == "__main__":
     unittest.main()
