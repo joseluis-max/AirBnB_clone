@@ -5,6 +5,11 @@ import cmd
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
@@ -38,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if (line == ""):
             print("** class name missing **")
-        elif line not in ["BaseModel", "User"]:
+        elif line not in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity"]:
             print("** class doesn't exist **")
         else:
             instance = eval(line)()
@@ -51,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         line = line.split(" ")
         if (line[0] == ""):
             print("** class name missing **")
-        elif line[0] not in ["BaseModel", "User"]:
+        elif line[0] not in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity"]:
             print("** class doesn't exist **")
         elif (len(line) == 1):
             print("** instance id missing **")
@@ -73,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         
         if (line[0] == ""):
             print("** class name missing **")
-        elif line[0] not in ["BaseModel", "User"]:
+        elif line[0] not in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity"]:
             print("** class doesn't exist **")
         elif (len(line) == 1):
             print("** instance id missing **")
@@ -82,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
                 tmp = json.load(file)
                 try:
                     if (tmp[line[0] + "."+line[1]] != None):
-                        
+                        tmp.pop(line[0] + "."+line[1])
                         with open("file.json", mode="w", encoding="utf-8") as file:
                             json.dump(tmp, file)
                         return
@@ -93,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based or not on the class name. 
             Ex: $ all BaseModel or $ all
         """
-        if line in ["BaseModel", "User", ""]:
+        if line in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity", ""]:
             instances = []
             with open("file.json", mode="r", encoding="utf-8") as file:
                 stream = json.load(file)
@@ -117,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         line = line.split(" ")
         if (line[0] == ""):
             print("** class name missing **")
-        elif line[0] not in ["BaseModel", "User"]:
+        elif line[0] not in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity"]:
             print("** class doesn't exist **")
         elif (len(line) == 1):
             print("** instance id missing **")
@@ -134,6 +139,50 @@ class HBNBCommand(cmd.Cmd):
                         json.dump(stream, file)
             except:
                 print("** no instance found **")
+    
+    def do_count(self, line):
+        """Count the string representation of an instance based on the class name.
+        """
+        i = 0
+        if (line == ""):
+            print("** class name missing **")
+        elif line not in ["BaseModel", "User", "State", "Review", "Place", "City", "Amenity"]:
+            print("** class doesn't exist **")
+        else:
+            with open("file.json", mode="r", encoding="utf-8") as file:
+                tmp = json.load(file)
+                for key in tmp:
+                    split = key.split(".")
+                    if (line == split[0]):
+                        i += 1
+                print(i)
+
+    def default(self, line):
+        l = line.split(".")
+        command = l[1].split("(")
+        try:
+            if (command[0] == "all"):
+                self.do_all(l[0])
+            elif (command[0] == "count"):
+                self.do_count(l[0])
+            elif (command[0] == "show"):
+                id = command[1][1:-2]
+                new_line = l[0] + " " + id
+                self.do_show(new_line)
+            elif (command[0] == "destroy"):
+                id = command[1][1:-2]
+                new_line = l[0] + " " + id
+                print(new_line)
+                self.do_destroy(new_line)
+            elif (command[0] == "update"):
+                data = command[1].split(",")
+                id = data[0][1:-1]
+                attr = data[1][2:-1]
+                value = data[2][2:-2]
+                new_line = l[0] + " " + id + " " + attr + " " + value
+                self.do_update(new_line)
+        except:
+            cmd.Cmd.default(self, line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
