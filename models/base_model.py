@@ -5,7 +5,6 @@ from datetime import datetime
 import models
 
 
-
 class BaseModel:
     """Defines all common attributes/methods for other classes
     """
@@ -19,17 +18,19 @@ class BaseModel:
                 - `id`: (string) random unique id with uuid4
                 - `created_at`: (string) created datetime
                 - `updated_at`: (string) updated datetime
-            
+
             Args:
             ----
                 - `**kargs`: key value arguments
         """
         if kargs and len(kargs) > 0:
             self.id = kargs.get('id')
-            self.created_at = datetime.strptime(kargs.get('created_at'), "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = datetime.strptime(kargs.get('updated_at'), "%Y-%m-%dT%H:%M:%S.%f")
+            self.created_at = datetime.strptime(kargs.get('created_at'),
+                                                "%Y-%m-%dT%H:%M:%S.%f")
+            self.updated_at = datetime.strptime(kargs.get('updated_at'),
+                                                "%Y-%m-%dT%H:%M:%S.%f")
             # self.name = kargs.get('name')
-            # self.my_number = kargs.get('my_number') 
+            # self.my_number = kargs.get('my_number')
         else:
             self.id = str(uuid.uuid4())
             dt = datetime.now()

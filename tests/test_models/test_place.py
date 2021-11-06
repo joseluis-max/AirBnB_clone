@@ -31,7 +31,7 @@ class TestAmenity(unittest.TestCase):
     def test_06_numbers_rooms_type(self):
         place = Place()
         self.assertEqual(type(place.number_rooms), int)
-    
+
     def test_07_number_bathrooms_type(self):
         place = Place()
         self.assertEqual(type(place.number_bathrooms), int)
@@ -47,11 +47,11 @@ class TestAmenity(unittest.TestCase):
     def test_10_latitude_type(self):
         place = Place()
         self.assertEqual(type(place.latitude), float)
-    
+
     def test_11_longitude_type(self):
         place = Place()
         self.assertEqual(type(place.longitude), float)
-    
+
     def test_12_amenity_ids_type(self):
         place = Place()
         self.assertEqual(type(place.amenity_ids), list)

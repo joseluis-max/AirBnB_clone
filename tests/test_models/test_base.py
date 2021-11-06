@@ -7,13 +7,14 @@ from models.base_model import BaseModel
 import models
 import os
 
+
 class TestBase(unittest.TestCase):
     # testing types data
     def test_01_str_type(self):
         base = BaseModel()
         string = base.__str__()
         self.assertEqual(type(string), str)
-    
+
     def test_02_to_dict_type(self):
         base = BaseModel()
         dictionary = base.to_dict()
@@ -22,15 +23,15 @@ class TestBase(unittest.TestCase):
     def test_03_id_type(self):
         base = BaseModel()
         self.assertEqual(type(base.id), str)
-    
+
     def test_04_create_at_type(self):
         base = BaseModel()
         self.assertEqual(type(base.created_at), datetime)
-    
+
     def test_05_update_at_type(self):
         base = BaseModel()
         self.assertEqual(type(base.updated_at), datetime)
-    
+
     def test_06_date_to_string(self):
         base = BaseModel().to_dict()
         self.assertEqual(type(base['created_at']), str)
@@ -97,6 +98,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(is_write_true)
         is_exec_true = os.access("models/engine/file_storage.py", os.X_OK)
         self.assertTrue(is_exec_true)
+
 
 if __name__ == "__main__":
     unittest.main()

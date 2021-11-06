@@ -15,11 +15,11 @@ class TestReview(unittest.TestCase):
     def test_01_place_id_type(self):
         review = Review()
         self.assertEqual(type(review.place_id), str)
-    
+
     def test_02_user_id_type(self):
         review = Review()
         self.assertEqual(type(review.user_id), str)
-    
+
     def test_03_text_type(self):
         review = Review()
         self.assertEqual(type(review.text), str)

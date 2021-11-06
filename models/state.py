@@ -8,7 +8,7 @@ class State(BaseModel):
     """ State
 
         Attr:
-        
+
             name:(string) Name state
     """
     name = ""

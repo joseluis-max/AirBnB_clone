@@ -15,7 +15,7 @@ class TestState(unittest.TestCase):
     def test_01_name_type(self):
         state = State()
         self.assertEqual(type(state.name), str)
-    
+
     # testing instance of state
     def test_02_instace_state(self):
         state = State()
