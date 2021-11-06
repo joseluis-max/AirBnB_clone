@@ -23,19 +23,17 @@ class BaseModel:
             ----
                 - `**kargs`: key value arguments
         """
-        if kargs and len(kargs) > 0:
-            self.id = kargs.get('id')
-            self.created_at = datetime.strptime(kargs.get('created_at'),
-                                                "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = datetime.strptime(kargs.get('updated_at'),
-                                                "%Y-%m-%dT%H:%M:%S.%f")
-            # self.name = kargs.get('name')
-            # self.my_number = kargs.get('my_number')
+        if kargs:
+            for key, value in kargs.items():
+                if key != "__class__":
+                    if key in ["created_at", "updated_at"]:
+                        value = datetime.strptime(value,
+                                                  "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            dt = datetime.now()
-            self.created_at = dt
-            self.updated_at = dt
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
