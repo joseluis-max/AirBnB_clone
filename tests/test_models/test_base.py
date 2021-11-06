@@ -84,7 +84,7 @@ class TestBase(unittest.TestCase):
     def test_docstring(self):
         """ function test_docstring """
         msj = "Module doesnt have docstring"
-        obj = models.engine.file_storage.__doc__
+        obj = models.base_model.__doc__
         self.assertIsNotNone(obj, msj)
         msj = "Classes doesnt have docstring"
         self.assertIsNotNone(obj, msj)
