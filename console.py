@@ -15,11 +15,10 @@ from models.state import State
 class HBNBCommand(cmd.Cmd):
     """ My first in Python"""
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_EOF(self, line):
         """Exit from prompt"""
-        print()
         return True
 
     def do_quit(self, line):
