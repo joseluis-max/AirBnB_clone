@@ -9,7 +9,7 @@ class BaseModel:
     """Defines all common attributes/methods for other classes
     """
 
-    def __init__(self, **kargs):
+    def __init__(self, *args, **kwargs):
         """Constructor
             ==========
 
@@ -23,8 +23,8 @@ class BaseModel:
             ----
                 - `**kargs`: key value arguments
         """
-        if kargs:
-            for key, value in kargs.items():
+        if kwargs:
+            for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ["created_at", "updated_at"]:
                         value = datetime.strptime(value,
