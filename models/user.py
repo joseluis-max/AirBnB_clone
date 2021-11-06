@@ -5,6 +5,7 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """User
+    
         Attr:
             email: string - empty string
             password: string - empty string
