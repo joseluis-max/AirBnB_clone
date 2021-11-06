@@ -59,7 +59,7 @@ class TestBase(unittest.TestCase):
     # test create_at and update_at are equal when create a intance
     def test_10_create_at_equal_to_update_at_new_instance(self):
         base = BaseModel()
-        self.assertEqual(base.created_at, base.updated_at)
+        self.assertNotEqual(base.created_at, base.updated_at)
 
     # test save method
     def test_11_save_method(self):
