@@ -39,7 +39,7 @@ class FileStorage:
         for key, value in self.__objects.items():
             d[key] = value.to_dict()
         with open(self.__file_path, mode="w", encoding="utf-8") as file:
-            json.dump(d, file, default=str)
+            json.dump(d, file, default=str, sort_keys=True, indent=4)
 
     def reload(self):
         """Reload data from json to __objects like instances of BaseModel

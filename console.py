@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
                     stream = json.load(file)
                     stream[line[0]+"."+line[1]][line[2]] = line[3]
                     with open("file.json", mode="w", encoding="utf-8") as file:
-                        json.dump(stream, file)
+                        json.dump(stream, file, sort_keys=True, indent=4)
             except (OSError, IndexError):
                 print("** no instance found **")
 

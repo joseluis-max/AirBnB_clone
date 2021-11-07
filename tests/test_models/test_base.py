@@ -6,6 +6,8 @@ import unittest
 from models.base_model import BaseModel
 import models
 import os
+import inspect
+module_doc = models.base_model.__doc__
 
 
 class TestBase(unittest.TestCase):
@@ -82,13 +84,65 @@ class TestBase(unittest.TestCase):
         base = BaseModel()
         self.assertEqual(base.__str__(), s.format(base.id, base.__dict__))
 
-    def test_docstring(self):
-        """ function test_docstring """
-        msj = "Module doesnt have docstring"
-        obj = models.base_model.__doc__
-        self.assertIsNotNone(obj, msj)
-        msj = "Classes doesnt have docstring"
-        self.assertIsNotNone(obj, msj)
+    # test attributes
+    def test_14_attrs(self):
+        base = BaseModel()
+        self.assertTrue(hasattr(base, "id"))
+        self.assertTrue(hasattr(base, "created_at"))
+        self.assertTrue(hasattr(base, "updated_at"))
+    
+    # test __class__ to dict
+    def test_15_class_(self):
+        base = BaseModel()
+        d = base.to_dict()
+        self.assertTrue(hasattr(base.__dict__, "__class__"))
+
+    def test_uuid(self):
+        """Test that id is a valid uuid"""
+        inst1 = BaseModel()
+        inst2 = BaseModel()
+        for inst in [inst1, inst2]:
+            uuid = inst.id
+            with self.subTest(uuid=uuid):
+                self.assertIs(type(uuid), str)
+                self.assertRegex(uuid,
+                                 '^[0-9a-f]{8}-[0-9a-f]{4}'
+                                 '-[0-9a-f]{4}-[0-9a-f]{4}'
+                                 '-[0-9a-f]{12}$')
+        self.assertNotEqual(inst1.id, inst2.id)
+
+    @classmethod
+    def setUpClass(self):
+        """Set up for docstring tests"""
+        self.base_funcs = inspect.getmembers(BaseModel, inspect.isfunction)
+
+    def test_module_docstring(self):
+        """Test for the existence of module docstring"""
+        self.assertIsNot(module_doc, None,
+                         "base_model.py needs a docstring")
+        self.assertTrue(len(module_doc) > 1,
+                        "base_model.py needs a docstring")
+
+    def test_class_docstring(self):
+        """Test for the BaseModel class docstring"""
+        self.assertIsNot(BaseModel.__doc__, None,
+                         "BaseModel class needs a docstring")
+        self.assertTrue(len(BaseModel.__doc__) >= 1,
+                        "BaseModel class needs a docstring")
+
+    def test_func_docstrings(self):
+        """Test for the presence of docstrings in BaseModel methods"""
+        for func in self.base_funcs:
+            with self.subTest(function=func):
+                self.assertIsNot(
+                    func[1].__doc__,
+                    None,
+                    "{:s} method needs a docstring".format(func[0])
+                )
+                self.assertTrue(
+                    len(func[1].__doc__) > 1,
+                    "{:s} method needs a docstring".format(func[0])
+                )
 
     def test_executable_file(self):
         """ function test_executable_file """
