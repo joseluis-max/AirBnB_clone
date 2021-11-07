@@ -25,6 +25,12 @@ class TestCity(unittest.TestCase):
         city = City()
         self.assertIsInstance(city, City)
 
+    def test_class(self):
+        """Test class"""
+        self.assertEqual(City.state_id, "")
+        self.assertEqual(City.name, "")
+        self.assertTrue(issubclass(City, BaseModel))
+
     def test_docstring(self):
         """ function test_docstring """
         msj = "Module doesnt have docstring"

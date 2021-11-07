@@ -5,6 +5,7 @@ import unittest
 import os
 import models
 from models.amenity import Amenity
+from models.base_model import BaseModel
 
 
 class TestAmenity(unittest.TestCase):
@@ -20,6 +21,11 @@ class TestAmenity(unittest.TestCase):
     def test_02_instace_amenity(self):
         amenity = Amenity()
         self.assertIsInstance(amenity, Amenity)
+
+    def test_class(self):
+        """Test class"""
+        self.assertEqual(Amenity.name, "")
+        self.assertTrue(issubclass(Amenity, BaseModel))
 
     def test_docstring(self):
         """ function test_docstring """
