@@ -89,16 +89,16 @@ class HBNBCommand(cmd.Cmd):
         elif (len(line) == 1):
             print("** instance id missing **")
         else:
-            with open("file.json", mode="r", encoding="utf-8") as file:
-                stream = json.load(file)
-                try:
+            try:
+                with open("file.json", mode="r", encoding="utf-8") as file:
+                    stream = json.load(file)
                     stream.pop(line[0] + "."+line[1])
                     with open("file.json", mode="w",
                                 encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)
                     return
-                except (KeyError, FileNotFoundError, AttributeError, OSError):
-                    print("** no instance found **")
+            except (KeyError, FileNotFoundError, AttributeError):
+                print("** no instance found **")
 
     def do_all(self, line):
         """Prints all string representation of all
