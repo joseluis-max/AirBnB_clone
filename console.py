@@ -90,13 +90,12 @@ class HBNBCommand(cmd.Cmd):
             with open("file.json", mode="r", encoding="utf-8") as file:
                 stream = json.load(file)
                 try:
-                    if (stream[line[0] + "."+line[1]]):
-                        stream.pop(line[0] + "."+line[1])
-                        with open("file.json", mode="w",
-                                  encoding="utf-8") as file:
-                            json.dump(stream, file, sort_keys=True, indent=4)
-                        return
-                except (OSError, KeyError):
+                    stream.pop(line[0] + "."+line[1])
+                    with open("file.json", mode="w",
+                                encoding="utf-8") as file:
+                        json.dump(stream, file, sort_keys=True, indent=4)
+                    return
+                except (KeyError, AttributeError, OSError):
                     print("** no instance found **")
 
     def do_all(self, line):
