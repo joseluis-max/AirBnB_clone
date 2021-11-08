@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
                                 encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)
                     return
-                except (KeyError, AttributeError, OSError):
+                except (KeyError, FileNotFoundError, AttributeError, OSError):
                     print("** no instance found **")
 
     def do_all(self, line):
