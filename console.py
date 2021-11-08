@@ -72,6 +72,7 @@ class HBNBCommand(cmd.Cmd):
                             base = eval(tmp[key]['__class__'])(**value)
                             print(base.__str__())
                             return
+                    print("** no instance found **")
             except FileNotFoundError:
                 print("** no instance found **")
 
