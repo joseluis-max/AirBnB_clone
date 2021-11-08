@@ -184,7 +184,6 @@ class HBNBCommand(cmd.Cmd):
             elif (command[0] == "destroy"):
                 id = command[1][1:-2]
                 new_line = split_line[0] + " " + id
-                print(new_line)
                 self.do_destroy(new_line)
             elif (command[0] == "update"):
                 data = command[1].split(",")
