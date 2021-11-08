@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
                                   encoding="utf-8") as file:
                             json.dump(tmp, file)
                         return
-                except (OSError, IndexError):
+                except (OSError, KeyError):
                     print("** no instance found **")
 
     def do_all(self, line):
@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
                     stream[line[0]+"."+line[1]][line[2]] = line[3]
                     with open("file.json", mode="w", encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)
-            except (OSError, IndexError):
+            except (OSError, KeyError):
                 print("** no instance found **")
 
     def do_count(self, line):
@@ -191,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
                 value = data[2][2:-2]
                 new_line = split_line[0] + " " + id + " " + attr + " " + value
                 self.do_update(new_line)
-        except (AttributeError, IndexError):
+        except (AttributeError, KeyError):
             cmd.Cmd.default(self, line)
 
 
