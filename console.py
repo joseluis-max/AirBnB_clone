@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 tmp = json.load(file)
                 for key, value in tmp.items():
                     split = key.split(".")
-                    if (line[1] == split[1]):
+                    if (line[0] == split[0] and line[1] == split[1]):
                         base = eval(tmp[key]['__class__'])(**value)
                         print(base.__str__())
                         return
@@ -88,13 +88,13 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             with open("file.json", mode="r", encoding="utf-8") as file:
-                tmp = json.load(file)
+                stream = json.load(file)
                 try:
-                    if (tmp[line[0] + "."+line[1]] is not None):
-                        tmp.pop(line[0] + "."+line[1])
+                    if (stream[line[0] + "."+line[1]] is not None):
+                        stream.pop(line[0] + "."+line[1])
                         with open("file.json", mode="w",
                                   encoding="utf-8") as file:
-                            json.dump(tmp, file)
+                            json.dump(stream, file, sort_keys=True, indent=4)
                         return
                 except (OSError, KeyError):
                     print("** no instance found **")
