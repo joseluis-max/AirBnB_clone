@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    def do_emptyline(self):
+    def emptyline(self):
         """Called when an empty line is entered in response to the prompt.
 
         If this method is not overridden, it repeats the last nonempty
