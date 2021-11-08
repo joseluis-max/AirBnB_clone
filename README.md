@@ -26,7 +26,7 @@ Console, is the first step towards building my first full web application: the A
     ```
         $ ./console.py
     ```
-3. Introduce one command to next list.
+3. Introduce one command of next list.
 ### How to used it ?
 - `create <class_name>`: create a new instance.
 - `show <class_name> <id>` or `<class_name>.shoe(<id>)`: show the instance.
