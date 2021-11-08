@@ -63,15 +63,17 @@ class HBNBCommand(cmd.Cmd):
         elif (len(line) == 1):
             print("** instance id missing **")
         else:
-            with open("file.json", mode="r", encoding="utf-8") as file:
-                tmp = json.load(file)
-                for key, value in tmp.items():
-                    split = key.split(".")
-                    if (line[0] == split[0] and line[1] == split[1]):
-                        base = eval(tmp[key]['__class__'])(**value)
-                        print(base.__str__())
-                        return
-            print("** no instance found **")
+            try:
+                with open("file.json", mode="r", encoding="utf-8") as file:
+                    tmp = json.load(file)
+                    for key, value in tmp.items():
+                        split = key.split(".")
+                        if (line[0] == split[0] and line[1] == split[1]):
+                            base = eval(tmp[key]['__class__'])(**value)
+                            print(base.__str__())
+                            return
+            except FileNotFoundError:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and
