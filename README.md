@@ -26,5 +26,5 @@ Console, is the first step towards building my first full web application: the A
 - `destroy <class_name> <id>` or `<class_name>.destroy(<id>)`: delete a instance
 - `all`: print all instances
 - `all <class_name>` or `<class_name>.all()`: print all class_name instances
-- `update <class_name> <id> <attribute_name> <new_value>`: update an attribute of class_name.id
+- `update <class_name> <id> <attribute_name> <new_value>` or `<class_name>.update(<id>, <attribute_name>, <value>)`: update an attribute of class_name.id
 - `count <class_name` or `<class_name>.count()`: counter class_name instances
