@@ -91,7 +91,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(hasattr(base, "id"))
         self.assertTrue(hasattr(base, "created_at"))
         self.assertTrue(hasattr(base, "updated_at"))
-    
+
     # test __class__ to dict
     def test_15_class_(self):
         base = BaseModel()

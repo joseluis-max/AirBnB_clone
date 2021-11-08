@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
                     stream = json.load(file)
                     stream.pop(line[0] + "."+line[1])
                     with open("file.json", mode="w",
-                                encoding="utf-8") as file:
+                              encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)
                     return
             except (KeyError, FileNotFoundError, AttributeError):
