@@ -15,6 +15,13 @@ Console, is the first step towards building my first full web application: the A
 ### How to start it ?
 
 1. Clone this repository.
+    ```
+        $ git clone git@github.com:joseluis-max/AirBnB_clone.git
+    ```
+    or
+    ```
+        $ git clone https://github.com/joseluis-max/AirBnB_clone.git
+    ```
 2. Execute console.py file
     ```
         $ ./console.py
