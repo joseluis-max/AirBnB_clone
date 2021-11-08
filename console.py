@@ -3,6 +3,7 @@
 """
 import cmd
 import json
+import ast
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -144,12 +145,11 @@ class HBNBCommand(cmd.Cmd):
             try:
                 with open("file.json", mode="r", encoding="utf-8") as file:
                     stream = json.load(file)
-                    if line[2] in ["numbers_bathrooms", "number_rooms",
-                                   "max_guest", "price_by_night"]:
-                        line[3] = int(line[3])
-                    elif line[2] in ["latitude", "longitude"]:
-                        line[3] = float(line[3])
-                    stream[line[0]+"."+line[1]][line[2]] = line[3]
+                    try:
+                        value = ast.literal_eval(line[3])
+                    except ValueError:
+                        value = line[3]
+                    stream[line[0]+"."+line[1]][line[2]] = value
                     with open("file.json", mode="w", encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)
             except (OSError, KeyError):
@@ -191,12 +191,19 @@ class HBNBCommand(cmd.Cmd):
                 new_line = split_line[0] + " " + id
                 self.do_destroy(new_line)
             elif (command[0] == "update"):
+                # User.update("cbd9afab-9e86-4602-8f85-031ad0a52838", {'first_name': "John", "age": 89})
                 data = command[1].split(",")
                 id = data[0][1:-1]
-                attr = data[1][2:-1]
-                value = data[2][2:-2]
-                new_line = split_line[0] + " " + id + " " + attr + " " + value
-                self.do_update(new_line)
+                try:
+                    dt = ast.literal_eval(str(data[1]+ "," + data[2][0:-1]).strip())
+                    for key, value in dt.items():    
+                        new_line = split_line[0] + " " + id + " " + key + " " + str(value)
+                        self.do_update(new_line)
+                except ValueError:
+                    attr = data[1][2:-1]
+                    value = data[2][2:-2]
+                    new_line = split_line[0] + " " + id + " " + attr + " " + value
+                    self.do_update(new_line)
         except (AttributeError, KeyError, IndexError):
             cmd.Cmd.default(self, line)
 
