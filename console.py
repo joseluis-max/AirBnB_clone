@@ -144,6 +144,11 @@ class HBNBCommand(cmd.Cmd):
             try:
                 with open("file.json", mode="r", encoding="utf-8") as file:
                     stream = json.load(file)
+                    if line[2] in ["numbers_bathrooms", "number_rooms",
+                                   "max_guest", "price_by_night"]:
+                        line[3] = int(line[3])
+                    elif line[2] in ["latitude", "longitude"]:
+                        line[3] = float(line[3])
                     stream[line[0]+"."+line[1]][line[2]] = line[3]
                     with open("file.json", mode="w", encoding="utf-8") as file:
                         json.dump(stream, file, sort_keys=True, indent=4)

@@ -36,7 +36,7 @@ Console, is the first step towards building my first full web application: the A
 - `update <class_name> <id> <attribute_name> <new_value>` or `<class_name>.update(<id>, <attribute_name>, <value>)`: update an attribute of class_name.id
 - `count <class_name` or `<class_name>.count()`: counter class_name instances
 ### Examples
-![Create](/statics/create_user.png)
-![show](/statics/show.png)
-![destroy](/statics/destroy.png)
-![count](/statics/count.png)
+![Create](/static/create_user.png)
+![show](/static/show.png)
+![destroy](/static/destroy.png)
+![count](/static/count.png)
