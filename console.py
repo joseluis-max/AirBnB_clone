@@ -34,9 +34,7 @@ class HBNBCommand(cmd.Cmd):
         command entered.
 
         """
-        if self.lastcmd:
-            self.lastcmd = ""
-            return self.onecmd('\n')
+        return False
 
     def do_create(self, line):
         """Creates a new instance of BaseModel,
