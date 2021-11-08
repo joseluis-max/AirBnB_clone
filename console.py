@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
             with open("file.json", mode="r", encoding="utf-8") as file:
                 stream = json.load(file)
                 try:
-                    if (stream[line[0] + "."+line[1]] is not None):
+                    if (stream[line[0] + "."+line[1]]):
                         stream.pop(line[0] + "."+line[1])
                         with open("file.json", mode="w",
                                   encoding="utf-8") as file:
@@ -168,8 +168,8 @@ class HBNBCommand(cmd.Cmd):
                 print(i)
 
     def default(self, line):
-        split_line = line.split(".")
         try:
+            split_line = line.split(".")
             command = split_line[1].split("(")
             if (command[0] == "all"):
                 self.do_all(split_line[0])
@@ -191,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
                 value = data[2][2:-2]
                 new_line = split_line[0] + " " + id + " " + attr + " " + value
                 self.do_update(new_line)
-        except (AttributeError, KeyError):
+        except (AttributeError, KeyError, IndexError):
             cmd.Cmd.default(self, line)
 
 
