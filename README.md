@@ -17,7 +17,7 @@ Console, is the first step towards building my first full web application: the A
 1. Clone this repository.
 2. Execute console.py file
     ```
-    $ ./console.py
+        $ ./console.py
     ```
 3. Introduce one command to next list.
 ### How to used it ?
@@ -28,3 +28,8 @@ Console, is the first step towards building my first full web application: the A
 - `all <class_name>` or `<class_name>.all()`: print all class_name instances
 - `update <class_name> <id> <attribute_name> <new_value>` or `<class_name>.update(<id>, <attribute_name>, <value>)`: update an attribute of class_name.id
 - `count <class_name` or `<class_name>.count()`: counter class_name instances
+### Examples
+![Create](/statics/create_user.png)
+![show](/statics/show.png)
+![destroy](/statics/destroy.png)
+![count](/statics/count.png)
