@@ -176,19 +176,19 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         try:
-            split_line = line.split(".")
-            command = split_line[1].split("(")
+            sp = line.split(".")
+            command = sp[1].split("(")
             if (command[0] == "all"):
-                self.do_all(split_line[0])
+                self.do_all(sp[0])
             elif (command[0] == "count"):
-                self.do_count(split_line[0])
+                self.do_count(sp[0])
             elif (command[0] == "show"):
                 id = command[1][1:-2]
-                new_line = split_line[0] + " " + id
+                new_line = sp[0] + " " + id
                 self.do_show(new_line)
             elif (command[0] == "destroy"):
                 id = command[1][1:-2]
-                new_line = split_line[0] + " " + id
+                new_line = sp[0] + " " + id
                 self.do_destroy(new_line)
             elif (command[0] == "update"):
                 data = command[1].split(",")
@@ -197,15 +197,13 @@ class HBNBCommand(cmd.Cmd):
                     string = str(data[1] + "," + data[2][0:-1]).strip()
                     dt = ast.literal_eval(string)
                     for key, value in dt.items():
-                        new_line = split_line[0] + " "
-                        + id + " " + key + " " + str(value)
-                        self.do_update(new_line)
+                        nl = sp[0] + " " + id + " " + key + " " + str(value)
+                        self.do_update(nl)
                 else:
                     attr = data[1][2:-1]
                     value = data[2][2:-2]
-                    new_line = split_line[0] + " "
-                    + id + " " + attr + " " + value
-                    self.do_update(new_line)
+                    nl = sp[0] + " " + id + " " + attr + " " + value
+                    self.do_update(nl)
         except (AttributeError, KeyError, IndexError):
             cmd.Cmd.default(self, line)
         except (SyntaxError, ValueError, IndentationError):
