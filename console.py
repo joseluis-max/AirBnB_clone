@@ -191,21 +191,25 @@ class HBNBCommand(cmd.Cmd):
                 new_line = split_line[0] + " " + id
                 self.do_destroy(new_line)
             elif (command[0] == "update"):
-                # User.update("cbd9afab-9e86-4602-8f85-031ad0a52838", {'first_name': "John", "age": 89})
                 data = command[1].split(",")
                 id = data[0][1:-1]
-                try:
-                    dt = ast.literal_eval(str(data[1]+ "," + data[2][0:-1]).strip())
-                    for key, value in dt.items():    
-                        new_line = split_line[0] + " " + id + " " + key + " " + str(value)
+                if (data[1][1] == "{"):
+                    string = str(data[1] + "," + data[2][0:-1]).strip()
+                    dt = ast.literal_eval(string)
+                    for key, value in dt.items():
+                        new_line = split_line[0] + " "
+                        + id + " " + key + " " + str(value)
                         self.do_update(new_line)
-                except ValueError:
+                else:
                     attr = data[1][2:-1]
                     value = data[2][2:-2]
-                    new_line = split_line[0] + " " + id + " " + attr + " " + value
+                    new_line = split_line[0] + " "
+                    + id + " " + attr + " " + value
                     self.do_update(new_line)
         except (AttributeError, KeyError, IndexError):
             cmd.Cmd.default(self, line)
+        except (SyntaxError, ValueError, IndentationError):
+            print("Syntax, value or identation error")
 
 
 if __name__ == '__main__':
