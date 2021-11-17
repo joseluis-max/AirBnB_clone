@@ -4,3 +4,5 @@ __pycache__/
 /models/engine/__pycache__
 .vscode
 file.json
+test_*
+/web_static/W3C-Validator

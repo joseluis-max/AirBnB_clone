@@ -9,7 +9,7 @@ class BaseModel:
     """Defines all common attributes/methods for other classes
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """Constructor
             ==========
 
@@ -56,8 +56,8 @@ class BaseModel:
 
             Return: Dictionary representation of instance
         """
-        dic = dict(self.__dict__)
-        dic["__class__"] = self.__class__.__name__
-        dic["created_at"] = self.created_at.isoformat()
-        dic["updated_at"] = self.updated_at.isoformat()
-        return dic
+        dictionary = dict(self.__dict__)
+        dictionary["__class__"] = self.__class__.__name__
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
+        return dictionary

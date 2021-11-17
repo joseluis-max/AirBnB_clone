@@ -16,7 +16,7 @@ class FileStorage:
 
         Attr:
             file_path: (str) file path where save the data
-            objects: (dict) Collection of instance of BaseModel class
+            objects: (dict) Collection of instance of class
     """
     __file_path = "file.json"
     __objects = {}
@@ -27,7 +27,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """Add a new instance of BaseModel to __objects
+        """Add a new instance of obj to __objects
         """
         self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
@@ -35,20 +35,20 @@ class FileStorage:
         """Save in json the objects dictionary like a dictionary of dictionary
             representation instances of BaseModel
         """
-        d = {}
+        dictionary = {}
         for key, value in self.__objects.items():
-            d[key] = value.to_dict()
+            dictionary[key] = value.to_dict()
         with open(self.__file_path, mode="w", encoding="utf-8") as file:
-            json.dump(d, file, default=str, sort_keys=True, indent=4)
+            json.dump(dictionary, file, default=str, sort_keys=True, indent=4)
 
     def reload(self):
         """Reload data from json to __objects like instances of BaseModel
         """
-        tmp = {}
         try:
+            stream = {}
             with open(self.__file_path, mode="r", encoding="utf-8") as file:
-                tmp = json.load(file)
+                stream = json.load(file)
+            for key, value in stream.items():
+                self.__objects[key] = eval(value.get("__class__"))(**value)
         except (OSError, ValueError):
             pass
-        for key, value in tmp.items():
-            self.__objects[key] = eval(value.get("__class__"))(**value)
