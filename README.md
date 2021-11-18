@@ -28,7 +28,6 @@ Console, is the first step towards building my first full web application: the A
     ```
 3. Introduce one command of next list.
 ### How to used it ?
-<<<<<<< Updated upstream
 - `create <class_name>`: create a new instance.
 - `show <class_name> <id>` or `<class_name>.shoe(<id>)`: show the instance.
 - `destroy <class_name> <id>` or `<class_name>.destroy(<id>)`: delete a instance
