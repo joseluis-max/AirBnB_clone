@@ -4,6 +4,15 @@ Interpreter to manage my AirBnB_clone objects.
 
 Console, is the first step towards building my first full web application: the AirBnB clone. This console is very important because you will use what you build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration…
 
+**About developer**
+This project was a part of Holberton school foundation program.
+I guest you feel free of review, comment and learn of him.
+Let me know:
+
+[Linkedin](https://www.linkedin.com/in/joseluis-max/)
+
+[My Personal Website, check it](https://jlvp.vercel.app)
+
 **We want to be able to manage the objects of our project:**
 
 - Create a new object (ex: a new User or a new Place)
